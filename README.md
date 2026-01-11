@@ -1,6 +1,5 @@
 # 🧪 SauceDemo Professional Automation Framework
 
-![Tests](https://github.com/YOUR_USERNAME/saucedemo-selenium-python/actions/workflows/main.yml/badge.svg)
 
 A production-ready Selenium Python testing framework featuring **Page Object Model (POM)** and **GitHub Actions CI/CD**.
 
