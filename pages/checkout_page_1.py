@@ -13,35 +13,19 @@ class CheckoutPage1(BasePage):
     def enter_checkout_info(self, fname, lname, zip_code):
         self.wait.until(EC.url_contains("checkout-step-one.html"))
         
-        # Fill form with explicit waits
-        first_name_field = self.find_element(self._first_name)
-        first_name_field.clear()
-        first_name_field.send_keys(fname)
-        time.sleep(0.3)
+        # Use framework wrappers for automatic logging
+        self.type_text(self._first_name, fname)
+        self.type_text(self._last_name, lname)
+        self.type_text(self._zip_code, zip_code)
         
-        last_name_field = self.find_element(self._last_name)
-        last_name_field.clear()
-        last_name_field.send_keys(lname)
-        time.sleep(0.3)
+        # CRITICAL: Small delay for form validation stabilization
+        time.sleep(2)
         
-        zip_field = self.find_element(self._zip_code)
-        zip_field.clear()
-        zip_field.send_keys(zip_code)
-        time.sleep(0.5)
+        # Use self.click instead of execute_script for visibility
+        self.click(self._continue_button) 
         
-        # Wait for form to be fully ready
-        time.sleep(1)
-        
-        # Scroll button into view
-        continue_btn = self.wait.until(EC.presence_of_element_located(self._continue_button))
-        self.driver.execute_script("arguments[0].scrollIntoView(true);", continue_btn)
-        time.sleep(0.3)
-        
-        # Try clicking with JS
-        self.driver.execute_script("arguments[0].click();", continue_btn)
-        
-        # Wait for navigation with longer timeout
-        self.wait_for_url_contains("checkout-step-two.html", timeout=20)
+        # Wait for navigation with explicit 15s timeout
+        self.wait_for_url_contains("checkout-step-two.html", timeout=15)
 
         from pages.checkout_page_2 import CheckoutPage2
         return CheckoutPage2(self.driver)
