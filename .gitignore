@@ -1,0 +1,25 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+env/
+.env
+
+# Logs
+logs/
+*.log
+
+# Screenshots
+screenshots/
+
+# IDE
+.vscode/
+.idea/
+
+# Test reports
+report.html
+.pytest_cache/
+
+# OS
+.DS_Store
